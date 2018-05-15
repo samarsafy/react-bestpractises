@@ -9,6 +9,9 @@ const styles = {
   },
   nomargin: {
     margin: 0
+  },
+  fullwidth: {
+    width: "100%"
   }
 };
 // TODO this could be turned into a functional component
@@ -18,7 +21,7 @@ export default class Post extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.state = {
-      preview: localStorage.getItem("preview") || ""
+      preview: JSON.parse(localStorage.getItem("preview")) || ""
     };
   }
   componentDidMount = () => {
@@ -87,7 +90,7 @@ export default class Post extends React.Component {
             this.fileInput = input;
           }}
         />
-        <img src={this.state.preview} id="image" />
+        <img style={styles.fullwidth} src={this.state.preview} id="image" />
       </form>
     );
   }
