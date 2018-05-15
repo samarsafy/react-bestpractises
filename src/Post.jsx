@@ -63,8 +63,9 @@ export default function Post(props) {
 Post.propTypes = {
   editing: PropTypes.object,
   handleCancel: PropTypes.func,
-  post: PropTypes.object,
+  post: PropTypes.object.isRequired,
   handleChange: PropTypes.func,
-  //handleEdit: PropsTypes.func,
-  handleDelete: PropsTypes.func
+  handleSubmit: PropsTypes.func,
+  handleDelete: PropsTypes.func,
+  form: PropTypes.object
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import PropTypes from "prop-types";
 
 const styles = {
   flexed: {
@@ -16,7 +17,7 @@ const styles = {
 };
 // TODO this could be turned into a functional component
 // https://hackernoon.com/react-stateless-functional-components-nine-wins-you-might-have-overlooked-997b0d933dbc
-export default class Post extends React.Component {
+export default class CreatePost extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -33,7 +34,7 @@ export default class Post extends React.Component {
   //handle file select and show a preview of the current selected image
   //https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
 
-  handleChange(event) {
+  handleChange = event => {
     //handle file select and
     //https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
     event.preventDefault();
@@ -45,7 +46,7 @@ export default class Post extends React.Component {
       localStorage.setItem("preview", JSON.stringify(e.target.result));
     };
     reader.readAsDataURL(this.fileInput.files[0]);
-  }
+  };
   render() {
     return (
       <form
