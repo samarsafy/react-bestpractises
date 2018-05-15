@@ -5,8 +5,6 @@ import SearchBar from "./SearchBar.jsx";
 import Nav from "./Nav.jsx";
 import CreatePost from "./CreatePost.jsx";
 
-const theme = "dark";
-
 //TODO remove those inline styles and replace by two different themes. Checkout the Nav how the theme is passed down.
 // https://material.io/tools/color/#!/?view.left=0&view.right=0
 const styles = {
@@ -16,20 +14,6 @@ const styles = {
 };
 
 const MyContext = React.createContext();
-class MyProvider extends component {
-  state = {
-    name: "Wes",
-    age: 100,
-    cool: true
-  };
-  render() {
-    return (
-      <MyContext.Provider value={{ state: this.state.name }}>
-        {this.props.children}
-      </MyContext.Provider>
-    );
-  }
-}
 
 class App extends React.Component {
   constructor(props) {
@@ -161,34 +145,34 @@ class App extends React.Component {
     );
 
     return (
-      <MyProvider>
-        <div>
-          <Nav theme={theme} />
-          <div className="container">
-            <div className="my-3 card">
-              <CreatePost
-                handleChange={this.handleChange}
-                handleSubmit={this.handleSubmit}
-                form={this.state.form}
-              />
+      <React.Fragment>
+        <ThemeContext.Provider value="dark">
+          <Nav />
+        </ThemeContext.Provider>
+        <div className="container">
+          <div className="my-3 card">
+            <CreatePost
+              handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+              form={this.state.form}
+            />
+          </div>
+          <div className="my-3 card">
+            <div className="card-content">
+              <h4 style={styles.nomargin}>List of all posts:</h4>
             </div>
-            <div className="my-3 card">
-              <div className="card-content">
-                <h4 style={styles.nomargin}>List of all posts:</h4>
-              </div>
-              <SearchBar
-                inputRef={this.searchRef}
-                handleSearch={this.handleSearch}
-              />
-              {posts.length > 0 ? (
-                posttemplate
-              ) : (
-                <div className="card-content">Nothing found</div>
-              )}
-            </div>
+            <SearchBar
+              inputRef={this.searchRef}
+              handleSearch={this.handleSearch}
+            />
+            {posts.length > 0 ? (
+              posttemplate
+            ) : (
+              <div className="card-content">Nothing found</div>
+            )}
           </div>
         </div>
-      </MyProvider>
+      </React.Fragment>
     );
   }
 }
